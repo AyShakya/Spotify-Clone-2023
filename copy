@@ -1,0 +1,57 @@
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Varela Round', sans-serif;
+<script src="https://kit.fontawesome.com/d6f299bdee.js" crossorigin="anonymous"></script>
+
+Array.from(document.getElementsByClassName('coverItem')).forEach((element) => {
+    element.addEventListener('click', (e) => {
+        makeAllDisplays();
+        coverIndex = parseInt(e.target.id);
+        e.target.classList.remove('fa-circle-play');
+        e.target.classList.add('fa-circle-pause');
+        coverElement.src = `covers/${coverIndex + 1}.jpg`
+        masterCoverName.innerHTML = Covers[coverIndex].coverPhoto;
+        coverElement.currentTime = 0;
+        Display();
+        masterPlay.classList.remove('fa-circle-play');
+        masterPlay.classList.add('fa-circle-pause');
+    })
+})
+
+document.getElementById('next').addEventListener('click', () => {
+    if (coverIndex >= 6) {
+        coverIndex = 0;
+    }
+    else {
+        coverIndex += 1;
+    }
+    coverElement.src = `covers/${coverIndex + 1}.jpg`
+    masterCoverName.innerHTML = Covers[coverIndex].coverPhoto;
+    coverElement.currentTime = 0;
+    Display();
+    masterPlay.classList.remove('fa-circle-play');
+    masterPlay.classList.add('fa-circle-pause');
+})
+
+document.getElementById('previous').addEventListener('click', () => {
+    if (coverIndex <= 0) {
+        coverIndex = 0;
+    }
+    else {
+        coverIndex -= 1;
+    }
+    coverElement.src = `covers/${coverIndex + 1}.jpg`
+    masterCoverName.innerHTML = Covers[coverIndex].coverPhoto;
+    coverElement.currentTime = 0;
+    Display();
+    masterPlay.classList.remove('fa-circle-play');
+    masterPlay.classList.add('fa-circle-pause');
+
+})
+
+const makeAllDisplays = () => {
+    Array.from(document.getElementsByClassName('coverItem')).forEach((element) => {
+        element.classList.remove('fa-circle-pause');
+        element.classList.add('fa-circle-play');
+
+    })
+}
